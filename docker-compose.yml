@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: news-asiawire
+    restart: always
+    environment:
+      POSTGRES_USER: news_asiawire
+      POSTGRES_PASSWORD: insanAsiaWire1!
+      POSTGRES_DB: news_cms
+      GCS_BUCKET_NAME:  asiawire
+      GCS_BASE_PATH: strapi-asiawire
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
