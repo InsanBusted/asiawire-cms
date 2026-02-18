@@ -23,6 +23,11 @@
       "type": "uid",
       "targetField": "title"
     },
+    "SEO": {
+      "type": "component",
+      "component": "shared.seo2",
+      "repeatable": true
+    },
     "cover": {
       "type": "media",
       "multiple": false,
@@ -56,9 +61,6 @@
     },
     "recommendation": {
       "type": "boolean"
-    },
-    "konten": {
-      "type": "richtext"
     }
   }
 }

@@ -44,9 +44,23 @@ export interface SharedSeo extends Struct.ComponentSchema {
     name: 'Seo';
   };
   attributes: {
-    metaDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
-    shareImage: Schema.Attribute.Media<'images'>;
+    seo: Schema.Attribute.Component<'shared.seo2', false>;
+  };
+}
+
+export interface SharedSeo2 extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seo2s';
+  info: {
+    displayName: 'seo2';
+    icon: 'globe';
+  };
+  attributes: {
+    metaDescription: Schema.Attribute.Text;
+    metaImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    metaKeywords: Schema.Attribute.String;
+    metaTitle: Schema.Attribute.String;
+    noIndex: Schema.Attribute.Boolean;
+    ogType: Schema.Attribute.Enumeration<['article', 'website']>;
   };
 }
 
@@ -69,6 +83,7 @@ declare module '@strapi/strapi' {
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
+      'shared.seo2': SharedSeo2;
       'shared.slider': SharedSlider;
     }
   }

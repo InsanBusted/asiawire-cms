@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_shared_seo2s",
+  "info": {
+    "displayName": "seo2",
+    "icon": "globe"
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string"
+    },
+    "metaDescription": {
+      "type": "text"
+    },
+    "metaKeywords": {
+      "type": "string"
+    },
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "ogType": {
+      "type": "enumeration",
+      "enum": [
+        "article",
+        "website"
+      ]
+    },
+    "noIndex": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}
