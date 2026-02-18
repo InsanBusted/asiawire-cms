@@ -1,20 +1,36 @@
-version: "3.8"
-
 services:
   postgres:
-    image: postgres:15
-    container_name: news-asiawire
-    restart: always
+    image: postgres:16-alpine
+    container_name: asiawire_postgres
     environment:
-      POSTGRES_USER: news_asiawire
-      POSTGRES_PASSWORD: insanAsiaWire1!
-      POSTGRES_DB: news_cms
-      GCS_BUCKET_NAME:  asiawire
-      GCS_BASE_PATH: strapi-asiawire
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - appnet
+
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: asiawire_strapi
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    volumes:
+      # kalau upload lokal Strapi
+      - public_uploads:/app/public/uploads
+    restart: unless-stopped
+    networks:
+      - appnet
+
+networks:
+  appnet:
 
 volumes:
-  postgres_data:
+  pgdata:
+  public_uploads:
