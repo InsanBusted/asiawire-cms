@@ -8,7 +8,7 @@ export default ({ env }) => ({
         baseUrl: env('GCS_BASE_URL'),
         serviceAccount: env.json('GCS_SERVICE_ACCOUNT_JSON'),
         publicFiles: true,
-        uniform: env.bool('GCS_UNIFORM', true),
+        uniform: true,
         expires: env.int('GCS_SIGNED_URL_EXPIRES', 15 * 60 * 1000),
         cacheMaxAge: env.int('GCS_CACHE_MAX_AGE', 60 * 60 * 24 * 7), 
       },
