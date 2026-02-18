@@ -1,30 +1,55 @@
-# ---- build stage ----
-FROM node:20-alpine AS build
+# ===============================
+# ---- BUILD STAGE --------------
+# ===============================
+FROM node:20-bullseye-slim AS build
+
 WORKDIR /app
 
-RUN apk add --no-cache file vips-dev
+# Install build dependencies (sharp + mime support)
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3 \
+    libvips-dev \
+    file \
+    && rm -rf /var/lib/apt/lists/*
 
-# deps
+# Install dependencies
 COPY package*.json ./
 RUN npm ci
 
-# source
+# Copy source
 COPY . .
 
-# build (Strapi v5 + TS)
+# Build Strapi (v5 + TypeScript)
 RUN npm run build
 
-# ---- runtime stage ----
-FROM node:20-alpine AS runtime
+
+# ===============================
+# ---- RUNTIME STAGE ------------
+# ===============================
+FROM node:20-bullseye-slim AS runtime
+
 WORKDIR /app
 ENV NODE_ENV=production
 
-# only production deps
+# Install runtime dependencies only
+RUN apt-get update && apt-get install -y \
+    libvips \
+    file \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install production deps only
 COPY package*.json ./
 RUN npm ci --omit=dev
 
-# copy built app
+# Copy built app from build stage
 COPY --from=build /app ./
 
+# Expose Strapi port
 EXPOSE 1337
+
+# Healthcheck (optional but recommended)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+  CMD curl -f http://localhost:1337/_health || exit 1
+
 CMD ["npm", "run", "start"]

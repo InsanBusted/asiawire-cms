@@ -1,6 +1,8 @@
+version: "3.9"
+
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:17
     container_name: asiawire_postgres
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
@@ -11,6 +13,11 @@ services:
     restart: unless-stopped
     networks:
       - appnet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   strapi:
     build:
@@ -20,17 +27,21 @@ services:
     env_file:
       - .env
     depends_on:
-      - postgres
-    volumes:
-      # kalau upload lokal Strapi
-      - public_uploads:/app/public/uploads
+      postgres:
+        condition: service_healthy
+    ports:
+      - "1337:1337"
     restart: unless-stopped
     networks:
       - appnet
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1337/_health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
 networks:
   appnet:
 
 volumes:
   pgdata:
-  public_uploads:
