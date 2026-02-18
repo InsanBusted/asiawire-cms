@@ -2,6 +2,8 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 
+RUN apk add --no-cache file vips-dev
+
 # deps
 COPY package*.json ./
 RUN npm ci
