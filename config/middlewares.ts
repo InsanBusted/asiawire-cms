@@ -17,7 +17,13 @@ const config: Core.Config.Middlewares = [
       },
     },
   },
-  "strapi::cors",
+  {
+    name: "strapi::cors",
+    config: {
+      origin: ["http://localhost:3000", "https://asiawire.id"],
+      headers: ["Content-Type", "Authorization", "Accept"],
+    },
+  },
   "strapi::poweredBy",
   "strapi::query",
   "strapi::body",
