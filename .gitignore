@@ -129,3 +129,6 @@ dist
 build
 .strapi-updater.json
 .strapi-cloud.json
+
+asiawire_deploy_key
+asiawire_deploy_key.pub
