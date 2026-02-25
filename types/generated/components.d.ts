@@ -57,7 +57,7 @@ export interface SharedSeo2 extends Struct.ComponentSchema {
   attributes: {
     metaDescription: Schema.Attribute.Text;
     metaImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    metaKeywords: Schema.Attribute.String;
+    metaKeywords: Schema.Attribute.Text;
     metaTitle: Schema.Attribute.String;
     noIndex: Schema.Attribute.Boolean;
     ogType: Schema.Attribute.Enumeration<['article', 'website']>;

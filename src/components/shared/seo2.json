@@ -13,7 +13,7 @@
       "type": "text"
     },
     "metaKeywords": {
-      "type": "string"
+      "type": "text"
     },
     "metaImage": {
       "type": "media",
