@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "article_views",
+  "info": {
+    "singularName": "article-view",
+    "pluralName": "article-views",
+    "displayName": "Article view"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "article": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::article.article",
+      "inversedBy": "article_views"
+    }
+  }
+}

@@ -8,15 +8,29 @@
     "description": "Create your blog content"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "description": {
       "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "maxLength": 80
     },
     "slug": {
@@ -25,11 +39,21 @@
     },
     "SEO": {
       "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "component": "shared.seo2",
       "repeatable": true
     },
     "cover": {
       "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "multiple": false,
       "required": false,
       "allowedTypes": [
@@ -46,15 +70,26 @@
     },
     "blocks": {
       "type": "dynamiczone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "components": [
         "shared.media",
         "shared.quote",
         "shared.rich-text",
         "shared.slider"
-      ]
+      ],
+      "required": true
     },
     "recommendation": {
-      "type": "boolean"
+      "type": "boolean",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "tags": {
       "type": "relation",
@@ -66,7 +101,25 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::sub-category.sub-category",
-      "inversedBy": "articles"
+      "inversedBy": "articles",
+      "required": true
+
+    },
+    "views": {
+      "type": "integer",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "default": 0
+    },
+    "article_views": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article-view.article-view",
+      "mappedBy": "article"
     }
   }
 }

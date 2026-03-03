@@ -1,14 +1,21 @@
+import { errors } from "@strapi/utils";
+
+const { ValidationError } = errors;
+
 export default {
   async beforeCreate(event) {
-    const user = event.state?.user;
-    if (!user) return;
+    const { data } = event.params;
 
-    event.params.data.users_permissions_user = user.id;
+    if (!data.sub_category) {
+      throw new ValidationError("Sub Category is required");
+    }
   },
 
   async beforeUpdate(event) {
-    if (event.params.data?.users_permissions_user) {
-      delete event.params.data.users_permissions_user;
+    const { data } = event.params;
+
+    if (data.sub_category === null) {
+      throw new ValidationError("Sub Category is required");
     }
   },
 };
