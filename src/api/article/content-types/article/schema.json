@@ -101,9 +101,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::sub-category.sub-category",
-      "inversedBy": "articles",
-      "required": true
-
+      "inversedBy": "articles"
     },
     "views": {
       "type": "integer",

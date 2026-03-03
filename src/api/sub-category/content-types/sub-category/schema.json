@@ -25,6 +25,10 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "sub_categories"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }
