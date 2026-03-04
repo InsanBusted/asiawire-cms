@@ -21,7 +21,7 @@ const config: Core.Config.Middlewares = [
     name: "strapi::cors",
     config: {
       enabled: true,
-      origin: ['http://localhost:3000', 'https://asiawire.id', 'http://72.61.214.14'],
+      origin: ['http://localhost:3000', 'https://asiawire.id', 'http://72.61.214.14', 'https://www.asiawire.id'],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       keepHeadersOnError: true,
